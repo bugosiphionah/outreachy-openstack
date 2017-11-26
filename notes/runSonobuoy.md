@@ -4,7 +4,8 @@
 
 	curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
 
-![kubectl](/images/kubectl download.png)
+![kubectl](/images/kubectldownload.png)
+![kubectl](/images/kubectldownload.png)
 
 2. Run a kubernetes cluster locally with minukube.
 
@@ -52,4 +53,4 @@ I solved this by installing kubeadm and running these commands:
 	sudo chown $(id -u):$(id -g) $HOME/admin.conf
 	export KUBECONFIG=$HOME/admin.conf
 
-I was able to successfully deploy sonobuoy on my cluster:
+I was able to successfully deploy sonobuoy on my cluster after this.

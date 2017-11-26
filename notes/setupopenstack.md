@@ -43,6 +43,8 @@ Let me get to the magic that worked for me.
 
 	./stack.sh
 
+![make test](/images/openstackenv.png)
+
 ## Common hickups you might face
 
 ### [ERROR] /opt/devstack/functions-common:1077 Failed to update apt repos, we're dead now

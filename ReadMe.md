@@ -2,7 +2,7 @@
 # Outreachy Tracker - Go container Related Projects In open stack 
 
 Author: Phionah Bugosi
-Email : bugosip@gmail.com
+Email : bugosip@gmail.com 
 IRC:	phionah
 blog: 	[Tech blog](http://bugosip.blogspot.ug/)
 
@@ -20,7 +20,7 @@ These links will get you to some of the notes I have made as I go about my work 
 
 ### Related Repositories
 
-+ [Kubernete](https://github.com/kubernetes/kubernetes)
++ [Kubernetes](https://github.com/kubernetes/kubernetes)
 + [Gophercloud](https://github.com/gophercloud/gophercloud)
 
 ### BackLog
@@ -29,13 +29,13 @@ These links will get you to some of the notes I have made as I go about my work 
 
 ### Tasks in Progress
 
-+ Add test for this [commit](https://github.com/kubernetes/kubernetes/pull/51498/commits/270de26987019ca7442ce1a38e17dbe6a07991f7).
++ Add test for Cinder Volume Resize for this [commit](https://github.com/kubernetes/kubernetes/pull/51498/commits/270de26987019ca7442ce1a38e17dbe6a07991f7).
 
 ### Finished Tasks
 
 + Setup openstack environment.
 + Run openstack tests in kubernetes.
-+ Setu and Run Sonobuoy.
++ Setup and Run Sonobuoy.
 
 ### Related PRS
 

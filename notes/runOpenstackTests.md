@@ -16,5 +16,3 @@ For open stack specific tests. I used:
 	go test -v k82.io/kubernetes/pkg/cloudprovider/providers/openstack
 
 ![make test](/images/openstack.png)
-
-

@@ -25,11 +25,17 @@ These links will get you to some of the notes I have made as I go about my work 
 
 ### BackLog
 
++ Add Cinder e2e tests.
+
 ### Tasks in Progress
 
-+ Add test for this [commit](https://github.com/kubernetes/kubernetes/pull/51498/commits/270de26987019ca7442ce1a38e17dbe6a07991f7)
++ Add test for this [commit](https://github.com/kubernetes/kubernetes/pull/51498/commits/270de26987019ca7442ce1a38e17dbe6a07991f7).
 
-+ Run tests in kubernetes against openstack environment.
+### Finished Tasks
+
++ Setup openstack environment.
++ Run openstack tests in kubernetes.
++ Setu and Run Sonobuoy.
 
 ### Related PRS
 

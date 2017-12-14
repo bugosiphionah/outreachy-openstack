@@ -24,10 +24,10 @@ We should have one master and two worker nodes. You can see the created kubernet
 
 ## 2.Install kubeadm and docker on the Nodes
 
-### 1.install on master Node
+### 1.Install on master Node
 
 <br> 1.ssh into the master node. </br>
-<br> 2.create a script and name it install.h with the contents below. </br>
+<br> 2.create a script and name it master.sh with the contents below. </br>
 
     apt-get update
     apt-get install apt-transport-https ca-certificates curl software-properties-common
@@ -51,9 +51,28 @@ This installs docker and kubernetes packages.
 ### 2.Install on worker Nodes
 
 <br> 1.ssh into the each worker node. </br>
-<br> 2.Run the same install script we used on master. </br>
+<br>2.2.create a script and name it worker.sh with the contents below.  </br>
+
+    apt-get update
+    apt-get install \
+        apt-transport-https \
+        ca-certificates \
+        curl \
+        software-properties-common
+
+    apt-add-repository \
+       "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+    add-apt-repository \
+       "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+       $(lsb_release -cs) \
+       stable"
+    apt-get update
+    apt-get install docker-ce -y --allow-unauthenticated
+    apt-get install -y kubelet kubeadm kubectl kubernetes-cni --allow-unauthenticated
+
+<br> 3.Run the the script to install on the worker node. Do this for all nodes created.</br>
  
-    sudo sh install.sh
+    sudo sh worker.sh
 
 ## 3.Work with kubeadm
 
@@ -73,5 +92,9 @@ If this ran successfully, then you should be able to see the nodes.
 
     kubectl --kubeconfig ./admin.conf get nodes
 
+### Reset kubeadm
 
+you can reset kubeadm state with:
+
+    kubeadm reset
 

@@ -22,7 +22,7 @@ We should have one master and two worker nodes. You can see the created kubernet
 
     os server list
 
-## 2.Install kubeadm and docker on the Nodes
+## 2.Install kubernetes and docker packages on the Nodes
 
 ### 1.Install on master Node
 
@@ -54,18 +54,9 @@ This installs docker and kubernetes packages.
 <br>2.2.create a script and name it worker.sh with the contents below.  </br>
 
     apt-get update
-    apt-get install \
-        apt-transport-https \
-        ca-certificates \
-        curl \
-        software-properties-common
-
-    apt-add-repository \
-       "deb http://apt.kubernetes.io/ kubernetes-xenial main"
-    add-apt-repository \
-       "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-       $(lsb_release -cs) \
-       stable"
+    apt-get install apt-transport-https ca-certificates  curl software-properties-common
+    apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs) stable"
     apt-get update
     apt-get install docker-ce -y --allow-unauthenticated
     apt-get install -y kubelet kubeadm kubectl kubernetes-cni --allow-unauthenticated
@@ -81,6 +72,10 @@ This installs docker and kubernetes packages.
 We can now use kubeadm to initialize kubernetes on the master Node.
 
     sudo kubeadm init
+
+### Install weave for networking
+
+    kubectl --kubeconfig ./admin.conf apply -f https://git.io/weave-kube-1.6
     
 ### Join worker nodes
 

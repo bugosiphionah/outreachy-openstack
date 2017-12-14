@@ -10,7 +10,7 @@ In this post, I will describe deployment of kubernets 1.9 to openstack using kub
 
 + Creating network instances on openstack to host kubernetes
 + Install kubernetes and docker
-+ Install master Kubernetes \n                                                                                                      sudo kubeadm init
++ Install master Kubernetes                                                                                                         sudo kubeadm init
 + Join worker nodes                                                                                                      
     sudo   kubeadm join
     

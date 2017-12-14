@@ -26,8 +26,8 @@ We should have one master and two worker nodes. You can see the created kubernet
 
 ### 1.install on master Node
 
-1.ssh into the master node.
-2.create a script and name it install.h with the contents below.
+<br> 1.ssh into the master node. </br>
+<br> 2.create a script and name it install.h with the contents below. </br>
 
     apt-get update
     apt-get install apt-transport-https ca-certificates curl software-properties-common
@@ -50,8 +50,8 @@ This installs docker and kubernetes packages.
 
 ### 2.Install on worker Nodes
 
-1.ssh into the each worker node.
-2.Run the same install script we used on master.
+<br> 1.ssh into the each worker node. </br>
+<br> 2.Run the same install script we used on master. </br>
  
     sudo sh install.sh
 
@@ -65,7 +65,7 @@ We can now use kubeadm to initialize kubernetes on the master Node.
     
 ### Join worker nodes
 
-Also use kubeadm join to add workesr.
+Also use kubeadm join to add workers.
 
     sudo   kubeadm join --token bdc910.dac015f93ad5a064 10.50.0.11:6443
     

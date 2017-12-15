@@ -2,7 +2,7 @@
 
 1. Install **kubectl**
 
-	curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+		curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
 
 ![kubectl](/images/kubectldownload.png)
 ![kubectl](/images/kubectldownload.png)
@@ -24,20 +24,20 @@ Run your kubernetes cluster
 
 3. I regenerate the quickstart YAML files.
 
-	make generate
+		make generate
 
 ![make generate](/images/makegenerate.png)
 
 4. I deployed a sonobuoy pod to kubernetes cluster with:
 
-	kubectl apply -f examples/quickstart.yaml
+		kubectl apply -f examples/quickstart.yaml
 
 
 ![sonobuoy success](/images/quickstartyml.png)
 
 5. You can then list available pods.
 
-	kubectl get pods -l component=sonobuoy --namespace=heptio-sonobuoy
+		kubectl get pods -l component=sonobuoy --namespace=heptio-sonobuoy
 
 ![sonobuoy list](/images/listpods.png)
 

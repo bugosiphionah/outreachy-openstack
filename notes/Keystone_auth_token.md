@@ -1,7 +1,5 @@
 ## Improve keystone Authenticaton in kubernetes
 
-Passing credentials through????
-
 ### Problem Description
 
 Currently, the openstack cloud provider authetincates users correctly with keystone but this suthentication is not used else where when working with openstack resources instead general credentials are used .
@@ -35,8 +33,3 @@ The documentation specific to the openstack cloud provider in kubernetes may nee
 + Tests
 
 There are tests for the openstack provider in kubernetes however token specific modifications may be made.
-
-### Grayish
-
-- Passing credentials through????? how different
-- 

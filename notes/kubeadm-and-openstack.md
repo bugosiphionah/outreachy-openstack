@@ -18,7 +18,7 @@ To follow along seamlessly, you should have the following in place:
     
 ## 1.Create Nodes on openstack
 
-As empahased earlier on, because kubernetes needs to be run somewhere, we shall create three network instances or nodes on openstack. 
+As emphasized earlier on, because kubernetes needs to be run somewhere, we shall create three network instances or nodes on openstack. 
 
     openstack server create --image xenial --key-name curtis --flavor m1.medium --min 3 --max 3 --nic net-id=cee24724-e062-4370-ba9f-57bed80f32cd \kubernetes
 
@@ -28,12 +28,15 @@ We should have one master and two worker nodes. You can see the created kubernet
 
 ## 2.Install kubernetes and docker packages on the Nodes
 
-### 1.Install on master Node
+### Master Node
+#### 1.Install on master Node
 
-<br> 1.ssh into the master node. </br>
-<br> 2.create a script and name it master.sh with the contents below. </br>
-    
-    #Install dependencies
+<br> ssh into the master node. </br>
+
+**Install dependencies**
+
+First, install all required dependencies on the master node.
+
     apt-get update -y && apt-get upgrade -y
     apt-get install -y \
     apt-transport-https \
@@ -66,8 +69,14 @@ We should have one master and two worker nodes. You can see the created kubernet
     apt-get update
     apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main
     apt-get install -y kubelet kubeadm kubectl kubernetes-cni --allow-unauthenticated
-    
     kubeadm init --skip-preflight-checks
+    
+Then you can clean up any old docker images so that you start from a clean slate. 
+
+**Create /etc/kubernetes/cloud-config and kubeadm.conf**
+
+Create and configure the /etc/kubernetes/cloud-config on the master node to talk to openstack.
+    
     cat << EOF > kubeadm.conf
     kind: MasterConfiguration
     apiVersion: kubeadm.k8s.io/v1alpha1
@@ -76,12 +85,15 @@ We should have one master and two worker nodes. You can see the created kubernet
     unifiedControlPlaneImage: "gcr.io/google_containers/hyperkube-amd64:v1.9.0"
     EOF
     echo "token: "$(kubeadm token generate) >> kubeadm.conf
-    
-    # Fix /etc/hosts to add entries from cloud.conf on BOTH master and node
-    # Copy cloud.conf over to the VM(s) in /etc/kubernetes/cloud-config on BOTH master and node
-
-    # patch /etc/systemd/system/kubelet.service.d/10-kubeadm.conf on both VM(s) to add the cloud provider related arguments
+  
     sed -i -E 's/(.*)KUBELET_KUBECONFIG_ARGS=(.*)$/\1KUBELET_KUBECONFIG_ARGS=--cloud-provider=openstack --cloud-            config=\/etc\/kubernetes\/cloud-config \2/' /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+    
+ ### Initialize Kubernetes
+
+We can now use kubeadm to initialize kubernetes on the master Node.
+
+    kubeadm init --config kubeadm.conf   
+    kubeadm init --config kubeadm.conf
 
     systemctl daemon-reload
     systemctl restart kubelet
@@ -106,17 +118,15 @@ We should have one master and two worker nodes. You can see the created kubernet
         kubernetes.io/cluster-service: "true"
         addonmanager.kubernetes.io/mode: EnsureExists
     provisioner: kubernetes.io/cinder
- 
- 3.Run the script.
- 
-    sudo sh install.sh
-    
-This installs docker, kubernetes packages and other dependencies..
 
-### 2. Install on worker Nodes
 
-<br> 1.ssh into the each worker node. </br>
-<br>2.2.create a script and name it worker.sh with the contents below.  </br>
+### Worker Nodes
+
+<br>ssh into the each worker node. </br>
+
+**Install dependencies**
+
+As done for master, we install necessary dependencies on the worker nodes as well.
 
     #Install dependencies
     apt-get update -y && apt-get upgrade -y
@@ -151,7 +161,13 @@ This installs docker, kubernetes packages and other dependencies..
     apt-get update
     apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main
     apt-get install -y kubelet kubeadm kubectl kubernetes-cni --allow-unauthenticated
-    
+ 
+ Then you can clean up any old docker images so that you start from a clean slate. 
+
+**Create /etc/kubernetes/cloud-config and kubeadm.conf**
+
+Create and configure the /etc/kubernetes/cloud-config on the master node to talk to openstack.
+
     # Fix /etc/hosts to add entries from cloud.conf on BOTH master and node
     # Copy cloud.conf over to the VM(s) in /etc/kubernetes/cloud-config on BOTH master and node
 
@@ -160,28 +176,14 @@ This installs docker, kubernetes packages and other dependencies..
 
     systemctl daemon-reload
     systemctl restart kubelet
-
-<br> 3.Run the the script to install on the worker node. Do this for all nodes created.</br>
- 
-    sudo sh worker.sh
-
-## 3.Work with kubeadm
-
-### Initialize Kubernetes master
-
-We can now use kubeadm to initialize kubernetes on the master Node.
-
-    kubeadm init --config kubeadm.conf
-
-### Install weave for networking
-
-    kubectl --kubeconfig ./admin.conf apply -f https://git.io/weave-kube-1.6
     
-### Join worker nodes
+**Join worker nodes**
 
-Also use kubeadm join to add workers.
+Use kubeadm join to add workers.
 
     sudo   kubeadm join --token bdc910.dac015f93ad5a064 10.50.0.11:6443
+    
+The scripts we have run on master will add the token to kubeadm.conf
     
 If this ran successfully, then you should be able to see the nodes.
 
@@ -204,4 +206,4 @@ If you need to clean up the Master and the nodes then use this:
     systemctl daemon-reload
     systemctl start kubelet
 
-Dims has created some [notes](https://gist.github.com/dims/3914bdfb0ebde52ea0118a237a4d90b9) that I found helpful.
+Dims has created some [notes](https://github.com/dims) that I found helpful.

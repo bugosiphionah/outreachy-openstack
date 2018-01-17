@@ -29,7 +29,6 @@ We should have one master and two worker nodes. You can see the created kubernet
 ## 2.Install kubernetes and docker packages on the Nodes
 
 ### Master Node
-#### 1.Install on master Node
 
 <br> ssh into the master node. </br>
 
@@ -87,12 +86,13 @@ Create and configure the /etc/kubernetes/cloud-config on the master node to talk
     echo "token: "$(kubeadm token generate) >> kubeadm.conf
   
     sed -i -E 's/(.*)KUBELET_KUBECONFIG_ARGS=(.*)$/\1KUBELET_KUBECONFIG_ARGS=--cloud-provider=openstack --cloud-            config=\/etc\/kubernetes\/cloud-config \2/' /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+
+The most important here is to set the cloudProvider value to specify openstack as the cloud provider in our case. Ensure both of these files are present.
     
- ### Initialize Kubernetes
+ ### Initialize kubernetes
 
 We can now use kubeadm to initialize kubernetes on the master Node.
 
-    kubeadm init --config kubeadm.conf   
     kubeadm init --config kubeadm.conf
 
     systemctl daemon-reload
@@ -118,7 +118,10 @@ We can now use kubeadm to initialize kubernetes on the master Node.
         kubernetes.io/cluster-service: "true"
         addonmanager.kubernetes.io/mode: EnsureExists
     provisioner: kubernetes.io/cinder
+    
+We should specify --config with kubeadm init to specify the config file we created earier on (kubeadm.conf). This will generate the apiserver.yaml and  /etc/kubernetes/manifests/kube-controller-manager.yaml files.
 
+At this point ensure that --cloud-provider, --cloud-config and volume / host path mounts for /etc/kubernetes/cloud-config exist.
 
 ### Worker Nodes
 

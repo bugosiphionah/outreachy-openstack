@@ -16,7 +16,7 @@ To follow along seamlessly, you should have the following in place:
 + Setup openstack. There is good [documentation](https://www.openstack.org/software/start/) to guide you.
 + Also the steps will work assuming debian based environments.
     
-## 1.Create Nodes on openstack
+## Create Nodes on openstack
 
 As emphasized earlier on, because kubernetes needs to be run somewhere, we shall create three network instances or nodes on openstack. 
 
@@ -25,10 +25,8 @@ As emphasized earlier on, because kubernetes needs to be run somewhere, we shall
 We should have one master and two worker nodes. You can see the created kubernetes nodes.
 
     os server list
-
-## 2.Install kubernetes and docker packages on the Nodes
-
-### Master Node
+    
+## On the Master Node
 
 <br> ssh into the master node. </br>
 
@@ -89,7 +87,7 @@ Create and configure the /etc/kubernetes/cloud-config on the master node to talk
 
 The most important here is to set the cloudProvider value to specify openstack as the cloud provider in our case. Ensure both of these files are present.
     
- ### Initialize kubernetes
+ **Initialize kubernetes**
 
 We can now use kubeadm to initialize kubernetes on the master Node.
 
@@ -123,7 +121,7 @@ We should specify --config with kubeadm init to specify the config file we creat
 
 At this point ensure that --cloud-provider, --cloud-config and volume / host path mounts for /etc/kubernetes/cloud-config exist.
 
-### Worker Nodes
+## Worker Nodes
 
 <br>ssh into the each worker node. </br>
 

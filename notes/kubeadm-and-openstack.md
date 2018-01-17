@@ -209,4 +209,4 @@ If you need to clean up the Master and the nodes then use this:
     systemctl daemon-reload
     systemctl start kubelet
 
-Dims has created some [notes](https://github.com/dims) that I found helpful.
+[Dims](https://github.com/dims) has created some [notes](https://github.com/dims) that I found helpful.

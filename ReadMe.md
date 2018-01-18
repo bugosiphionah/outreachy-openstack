@@ -47,7 +47,7 @@ These links will get you to some of the notes I have made as I go about my work 
 + [SharedFilesystems v2: Change Specs to ExtraSpecs ](https://github.com/gophercloud/gophercloud/pull/517)
 + [Neutron Ports: Add support for extra_dhcp_opt](https://github.com/gophercloud/gophercloud/pull/533)
 + [Add test for Cider ExpandVolume](https://github.com/kubernetes/kubernetes/pull/56407)
-+ [Add Cinder e2e tests(https://github.com/kubernetes/kubernetes/pull/51498/commits/270de26987019ca7442ce1a38e17dbe6a07991f7)
++ [Add Cinder e2e tests](https://github.com/kubernetes/kubernetes/pull/51498/commits/270de26987019ca7442ce1a38e17dbe6a07991f7)
 
 
 

@@ -25,17 +25,19 @@ These links will get you to some of the notes I have made as I go about my work 
 
 ### BackLog
 
-+ Add Cinder e2e tests.
++ Work on closing issues on [openstack-cloud-controller-manager](https://github.com/dims/openstack-cloud-controller-manager)
 
 ### Tasks in Progress
 
-+ Add test for Cinder Volume Resize for this [commit](https://github.com/kubernetes/kubernetes/pull/51498/commits/270de26987019ca7442ce1a38e17dbe6a07991f7).
++ Add test for Cinder Volume Resize for this [commit](https://github.com/kubernetes/kubernetes/pull/51498/commits/270de26987019ca7442ce1a38e17dbe6a07991f7). In test
++ Keystone auth token used for openstack cloudprovider resources
 
 ### Finished Tasks
 
 + Setup openstack environment.
 + Run openstack tests in kubernetes.
 + Setup and Run Sonobuoy.
++ Write about openstack + kubeadm + kubernetes
 
 ### Related PRS
 
@@ -44,7 +46,8 @@ These links will get you to some of the notes I have made as I go about my work 
 + [Compute v2: Add Lock/Unlock Action](https://github.com/gophercloud/gophercloud/pull/522)
 + [SharedFilesystems v2: Change Specs to ExtraSpecs ](https://github.com/gophercloud/gophercloud/pull/517)
 + [Neutron Ports: Add support for extra_dhcp_opt](https://github.com/gophercloud/gophercloud/pull/533)
-+ [OpenStack cloud provider should support project instead of tenant](https://github.com/kubernetes/kubernetes/issues/52563)
++ [Add test for Cider ExpandVolume](https://github.com/kubernetes/kubernetes/pull/56407)
++ [Add Cinder e2e tests(https://github.com/kubernetes/kubernetes/pull/51498/commits/270de26987019ca7442ce1a38e17dbe6a07991f7)
 
 
 
